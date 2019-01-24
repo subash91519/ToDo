@@ -39,6 +39,24 @@ class ToDoListViewController: UITableViewController {
         
     }
 
+    @IBAction func addAction(_ sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "ADD", message: "Add Your To Do List", preferredStyle: .alert)
+        var textField = UITextField()
+        
+        let action = UIAlertAction(title: "Add Content", style: .default) { (action) in
+            self.content.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField(configurationHandler: { (alertTextFiled) in
+            textField = alertTextFiled
+        })
 
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
 

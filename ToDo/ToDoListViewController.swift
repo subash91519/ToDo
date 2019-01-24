@@ -11,10 +11,18 @@ import UIKit
 class ToDoListViewController: UITableViewController {
     
     var content = ["BRN","Udemy","Varnith"]
+    
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+       if let item = defaults.array(forKey: "NewItem") {
+        content = item as! [String]
+        }
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +54,9 @@ class ToDoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Content", style: .default) { (action) in
             self.content.append(textField.text!)
+            
+            self.defaults.set(self.content, forKey: "NewItem")
+            
             self.tableView.reloadData()
         }
         
